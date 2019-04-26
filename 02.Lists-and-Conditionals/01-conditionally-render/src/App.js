@@ -46,7 +46,9 @@ class App extends Component {
       {name:"Juan", age:"25"},
       {name:"María", age:"18"},
       {name:"Rogelio", age:"78"}
-    ]
+    ],
+    otherState: "other value",
+    showPersons: false
   }
 
   nameSwitchHandler = (newName) => {
@@ -71,6 +73,11 @@ class App extends Component {
     });
   }
 
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow}); //change the current state
+  }
+
   render() {
 
     const style = {
@@ -81,26 +88,36 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    let persons = null; //JSX code block
+
+    if(this.state.showPersons === true) { //charge persons variable
+      persons = (
+        <div>
+            <Person 
+              click={this.nameSwitchHandler.bind(this, 'Juan')}
+              age={this.state.persons[0].age} 
+              name={this.state.persons[0].name}
+              />
+              <Person age={this.state.persons[1].age}
+              name={this.state.persons[1].name}
+              changed={this.changedNameHandler}> My Hobbies: Read.</Person>
+              <Person 
+              age={this.state.persons[2].age} 
+              name={this.state.persons[2].name}
+            />
+          </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>This is a React App</h1>
         <button 
         style = {style}
-        onClick={() => this.nameSwitchHandler('Juan Ignacio!!!')}>
-        Switch Name
-        </button>
-        <Person 
-          click={this.nameSwitchHandler.bind(this, 'Juan')}
-          age={this.state.persons[0].age} 
-          name={this.state.persons[0].name}
-          />
-        <Person age={this.state.persons[1].age}
-         name={this.state.persons[1].name}
-         changed={this.changedNameHandler}> My Hobbies: Read.</Person>
-        <Person 
-        age={this.state.persons[2].age} 
-        name={this.state.persons[2].name}
-        />
+        onClick={() => this.togglePersonsHandler()}>
+        Toggle Persons
+        </button> 
+        {persons}
       </div>
     );
   }
