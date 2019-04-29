@@ -6,9 +6,9 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      {name:"Juan", age:"25"},
-      {name:"María", age:"18"},
-      {name:"Rogelio", age:"78"}
+      {id: 'askjla1', name:"Juan", age:"25"},
+      {id: 'assajs1', name:"María", age:"18"},
+      {id: 'aklajl1', name:"Rogelio", age:"78"}
     ],
     otherState: "other value",
     showPersons: false
@@ -30,7 +30,7 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    //const persons = this.state.persons; --> try to not use this. We are manipulating the original array and is insecure.
+    //const persons = this.state.persons; --> try to not use this. We are manipulating the original array and it's insecure.
     //const persons = this.state.persons.slice(); --> with this, we create a copy to modify safely
     const persons = [...this.state.persons]; //this the same as slice() but using spread operator, a modern ES6 feature
     persons.splice(personIndex, 1);
@@ -56,7 +56,8 @@ class App extends Component {
             return <Person 
               click={() => this.deletePersonHandler(index)}
               name={person.name} 
-              age={person.age} />
+              age={person.age} 
+              key={person.id}/>
           })}
         </div>
       );
