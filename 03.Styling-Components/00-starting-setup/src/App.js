@@ -54,6 +54,16 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    const classes = [];
+
+    if(this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    
+    if(this.state.persons.length <=1) {
+      classes.push('bold');
+    }
+
     let persons = null; //JSX code block
 
     if(this.state.showPersons === true) { //charge persons variable
@@ -75,6 +85,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>This is a React App</h1>
+        <p className = {classes.join(" ")}>This is working :O</p>
         <button 
         style = {style}
         onClick={() => this.togglePersonsHandler()}>
