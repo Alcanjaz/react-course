@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import styles from './App.css';
 import Person from './Person/Person';
 
 //However, we use more often the Class based component
@@ -44,27 +44,18 @@ class App extends Component {
   }
 
   render() {
-
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    }
-
     const classes = [];
 
     if(this.state.persons.length <= 2) {
-      classes.push('red');
+      classes.push(styles.red);
     }
     
     if(this.state.persons.length <=1) {
-      classes.push('bold');
+      classes.push(styles.bold);
     }
 
     let persons = null; //JSX code block
+    let btnClass = '';
 
     if(this.state.showPersons === true) { //charge persons variable
       persons = (
@@ -79,15 +70,14 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = 'red';
+      btnClass = styles.Red;
     }
 
     return (
-      <div className="App">
+      <div className={styles.App}>
         <h1>This is a React App</h1>
         <p className = {classes.join(" ")}>This is working :O</p>
-        <button 
-        style = {style}
+        <button className={btnClass}
         onClick={() => this.togglePersonsHandler()}>
         Toggle Persons
         </button> 
@@ -97,4 +87,4 @@ class App extends Component {
   }
 }
 
-export default Radium(App); //We export an app component but wrapping Radium to inject its functionalities
+export default App; //We export an app component but wrapping Radium to inject its functionalities
