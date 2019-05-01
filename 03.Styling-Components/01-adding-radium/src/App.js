@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium, {StyleRoot} from 'radium';
 import './App.css';
 import Person from './Person/Person';
 
@@ -51,7 +52,13 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      /*by default, we can't use pseudo selectors or media queries in our inline styles 
+        for that, we use a react package named Radium that allow us to use this functionalities*/
+      ':hover': { 
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     }
 
     const classes = [];
@@ -80,21 +87,27 @@ class App extends Component {
         </div>
       );
       style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor : 'salmon',
+        color: 'black'
+      }
     }
 
     return (
-      <div className="App">
-        <h1>This is a React App</h1>
-        <p className = {classes.join(" ")}>This is working :O</p>
-        <button 
-        style = {style}
-        onClick={() => this.togglePersonsHandler()}>
-        Toggle Persons
-        </button> 
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>This is a React App</h1>
+          <p className = {classes.join(" ")}>This is working :O</p>
+          <button 
+          style = {style}
+          onClick={() => this.togglePersonsHandler()}>
+          Toggle Persons
+          </button> 
+          {persons}
+        </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App); //We export an app component but wrapping Radium to inject its functionalities
