@@ -106,7 +106,7 @@ class App extends Component {
       { this.state.showCockpit ? (
           <Cockpit 
           title = {this.props.title} //We can assign props to class based components too
-          persons = {this.state.persons}
+          personsLength = {this.state.persons.length}
           clicked = {this.togglePersonsHandler}
           showPersons = {this.state.showPersons}/>)
           : null}
