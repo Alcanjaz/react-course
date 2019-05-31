@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from './App.module.css';
 import Cockpit from '../Components/Cockpit/Cockpit';
 import Persons from '../Components/Persons/Persons';
+import Aux from '../hoc/Aux';
 import WithClass from '../hoc/withClass';
 
 /* We have a problem
@@ -102,7 +103,7 @@ class App extends Component {
     }
 
     return (
-      <WithClass classes={styles.App}>
+      <Aux classes={styles.App}>
       <button onClick={this.toggleCockpitHandler}>Remove Cockpit</button>
       { this.state.showCockpit ? (
           <Cockpit 
@@ -112,10 +113,10 @@ class App extends Component {
           showPersons = {this.state.showPersons}/>)
           : null}
       {persons}
-      </WithClass>
+      </Aux>
         
     );
   }
 }
 
-export default App;
+export default WithClass(App, styles.App);
