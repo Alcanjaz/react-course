@@ -17,7 +17,7 @@ class FullPost extends Component {
       ) {
         axios
           .get(
-            `https://jsonplaceholder.typicode.com/posts/${
+            `/posts/${
               this.props.selectedId
             }`
           )
@@ -31,7 +31,7 @@ class FullPost extends Component {
   deletePostHandler = () => {
     axios
       .delete(
-        `https://jsonplaceholder.typicode.com/posts/${this.props.selectedId}`
+        `/posts/${this.props.selectedId}`
       )
       .then(response => console.log(response));
   };
